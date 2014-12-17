@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="BoardApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Task - Board</title>
+    <link rel="stylesheet" href="static/css/normalize.css">
+    <link rel="stylesheet" href="static/css/the-style.css">
+    <style>
+        [ng-drag].dragging{
+            /*opacity: 0.5;*/
+            width: 22%;
+        }
+    </style>
+</head>
+<body ng-controller="boardController">
+<div class="header">
+    <div class="title column">ToDo</div>
+    <div class="title column">In Progress</div>
+    <div class="title column">Done!</div>
+    <div class="title column">FIX</div>
+</div>
+<div class="content">
+    <!--div class="column tasks" ondragover="allowDrop(event)" ondrop="drop(event)"-->
+    <!--div class="column tasks" ondragover="allowDrop(event)" ondrop="drop(event)">
+        <div class="task" id="id-task-{@ item.id @}"  draggable="true"  ondragstart="drag(event)" ng-repeat="item in itemsTODO">
+            <div class="task-title">{@ item.name @}</div>
+            <div class="task-description">{@ item.description @}</div>
+        </div>
+    </div-->
+
+    <div class="column tasks" ng-drop="true" ng-drop-success="onDropComplete($data, 'A')">
+        <div class="task" ng-drag="true" ng-drag-success="onDragComplete($data, 'A')"
+                ng-repeat="item in itemsA" ng-drag-data="item">
+            <span class="task-remove" title="remove" ng-click="removeTask(item, 'A')">X</span>
+            <div class="task-title">#{@ item.name @} <span class="task-author">({@ item.author @})</span></div>
+            <div class="task-description">{@ item.description @}</div>
+        </div>
+    </div>
+
+   <div class="column tasks" ng-drop="true" ng-drop-success="onDropComplete($data, 'B', $event)">
+        <div class="task" ng-drag="true" ng-drag-success="onDragComplete($data, 'B')"
+                ng-repeat="item in itemsB" ng-drag-data="item">
+            <span class="task-remove" title="remove" ng-click="removeTask(item, 'B')">X</span>
+            <div class="task-title">#{@ item.name @} <span class="task-author">({@ item.author @})</span></div>
+            <div class="task-description">{@ item.description @}</div>
+        </div>
+   </div>
+
+    <div class="column tasks" ng-drop="true" ng-drop-success="onDropComplete($data, 'C')">
+        <div class="task" ng-drag="true" ng-drag-success="onDragComplete($data, 'C')"
+                ng-repeat="item in itemsC" ng-drag-data="item">
+            <span class="task-remove" title="remove" ng-click="removeTask(item, 'C')">X</span>
+            <div class="task-title">#{@ item.name @} <span class="task-author">({@ item.author @})</span></div>
+            <div class="task-description">{@ item.description @}</div>
+        </div>
+    </div>
+
+    <div class="column tasks" ng-drop="true" ng-drop-success="onDropComplete($data, 'D')">
+        <div class="task" ng-drag="true" ng-drag-success="onDragComplete($data, 'D')"
+                ng-repeat="item in itemsD" ng-drag-data="item">
+            <span class="task-remove" title="remove" ng-click="removeTask(item, 'D')">X</span>
+            <div class="task-title">#{@ item.name @} <span class="task-author">({@ item.author @})</span></div>
+            <div class="task-description">{@ item.description @}</div>
+        </div>
+    </div>
+
+</div>
+<div class="task-option">
+    <img src="static/img/ic_action_new.png" id="add-new-task" class="task-option" title="add new task"
+         ng-click="newTask()">
+    <img src="static/img/ic_action_refresh.png" class="task-option" title="refresh"
+            ng-click="refresh()">
+</div>
+<!-- dialog -->
+<div id="dialog-add-task" class="dialog-wrapper">
+    <div class="dialog-pre-content">
+        <form action="" class="dialog-content">
+            <input type="text" placeholder="task name" ng-model="task.name">&nbsp;
+            <textarea placeholder="description" rows="6" ng-model="task.description"></textarea>&nbsp;
+            <!--select>
+                <option>-importance-</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select -->
+            <div class="dialog-button">
+                <button type="submit" ng-click="addTask(task)">Add</button>
+                <button type="submit" ng-click="closeDialog()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="overlay"></div>
+<script src="static/js/jquery-1.11.1.min.js"></script>
+<script src="static/js/angular.min.js"></script>
+<script src="static/js/angular-draggable.js"></script>
+<script src="static/js/magician.js"></script>
+</body>
+</html>
