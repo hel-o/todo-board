@@ -8,7 +8,7 @@ Python - Flask, AngularJs, Sqlite
 
 First install the requirements.txt, then run:
  
-init_db.py
+python init_db.py
 
 Finally run the app:
 
