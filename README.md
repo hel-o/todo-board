@@ -7,6 +7,9 @@ Enter your name, add your tasks, drag and drop your advances.
 Python - Flask, AngularJs, Sqlite
 
 First install the requirements.txt, then run:
+ 
+init_db.py
 
-python init_db.py
+finally run the app:
+
 python app.py
